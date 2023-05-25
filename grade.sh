@@ -18,20 +18,23 @@ else
     exit 1
 fi
 
-if ! javac -cp $CPATH -d ./student-submission/TestListExamples.java
-then
-    echo 'Compilation of tests failed!'
-    exit 1
-fi
-
 if ! javac -cp $CPATH -d ./grading-area/ListExamples.java
 then
     echo "Compilation of student's code failed!"
     exit 1
 fi
 
+#set +e
+java ListExamples > out.txt 2>&1
+if [[ $? -eq 1 ]]
+then
+    cat out.txt
+    exit 1
+fi
+    
+    
+
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
 
-# Then, add here code to compile and run, and do any post-processing of the
-# tests
+# Then, add here code to compile and run, and do any post-processing of the tests
